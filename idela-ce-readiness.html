@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CE Readiness Diagnostic — Idela</title>
+<meta name="description" content="Score your Cyber Essentials readiness in 5 minutes. Free diagnostic tool from Idela, IASME-approved Certification Body.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0c0b09;--ink-2:#1c1a17;--ink-soft:#4a4640;--ink-muted:#7a746c;
+  --paper:#f5f3ee;--paper-2:#ede9e2;--paper-3:#e2ddd5;--rule:#d8d3cb;
+  --forest:#0b3520;--forest-2:#124d2e;--forest-mid:#1c7046;--forest-light:#29975e;
+  --forest-pale:#e4f2eb;--forest-pale-2:#cce8d8;
+  --amber:#7a4f0a;--amber-mid:#a86d10;--amber-light:#d4921a;
+  --red:#8b1a1a;--red-light:#fdeaea;
+  --serif:"Fraunces",Georgia,serif;--sans:"DM Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:100;background:var(--ink);padding:0 2rem;height:54px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo img{height:28px;display:block}
+.nav-back{font-size:12px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s}
+.nav-back:hover{color:#fff}
+.page{max-width:640px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.intro-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--forest-mid);margin-bottom:.6rem;display:flex;align-items:center;gap:8px}
+.intro-eyebrow::before{content:"";width:18px;height:1px;background:var(--forest-mid);flex-shrink:0}
+.intro-title{font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.6rem);font-weight:400;color:var(--ink);line-height:1.1;margin-bottom:.6rem;letter-spacing:-.02em}
+.intro-sub{font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:1.5rem;font-weight:300}
+.intro-meta{font-size:12px;color:var(--ink-muted);background:var(--paper-2);padding:.6rem 1rem;border-radius:6px;margin-bottom:2rem;border:1px solid var(--rule)}
+.progress-wrap{margin-bottom:2rem}
+.progress-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.progress-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
+.progress-pct{font-size:11px;color:var(--ink-muted)}
+.progress-track{height:4px;background:var(--rule);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--forest-light);border-radius:2px;transition:width .4s ease}
+.section-card{background:#fff;border:1px solid var(--rule);border-radius:10px;margin-bottom:1rem;overflow:hidden;transition:border-color .2s}
+.section-card.active{border-color:var(--forest-mid)}
+.section-hdr{padding:.85rem 1.25rem;background:var(--paper-2);border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:.75rem}
+.section-num{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--ink-muted);min-width:22px}
+.section-title{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.section-max{font-size:11px;color:var(--ink-muted)}
+.section-body{padding:1rem 1.25rem;display:none}
+.section-card.active .section-body{display:block}
+.statement{padding:.85rem 0;border-bottom:1px solid var(--rule)}
+.statement:last-child{border-bottom:none;padding-bottom:0}
+.stmt-text{font-size:13px;color:var(--ink);line-height:1.55;margin-bottom:.6rem}
+.score-btns{display:flex;gap:6px}
+.score-btn{flex:1;padding:7px 4px;border-radius:6px;border:1px solid var(--rule);background:var(--paper);font-size:12px;font-weight:500;color:var(--ink-soft);cursor:pointer;transition:all .15s;font-family:var(--sans);text-align:center;line-height:1.3}
+.score-btn:hover{background:var(--paper-2);border-color:#c8c4bb}
+.score-btn.sel4{background:var(--forest-pale);border-color:var(--forest-light);color:var(--forest)}
+.score-btn.sel2{background:#fef9e7;border-color:#c9a84c;color:#5a3e00}
+.score-btn.sel0{background:var(--red-light);border-color:#d4a0a0;color:var(--red)}
+.result-hero{border-radius:10px;padding:2rem;margin-bottom:1rem;border:2px solid}
+.result-hero.ready{background:var(--forest-pale);border-color:var(--forest-light)}
+.result-hero.gaps{background:#fef9e7;border-color:#c9a84c}
+.result-hero.foundation{background:var(--red-light);border-color:#d4a0a0}
+.result-eyebrow{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.ready .result-eyebrow{color:var(--forest-mid)}
+.gaps .result-eyebrow{color:#7a4f0a}
+.foundation .result-eyebrow{color:var(--red)}
+.result-score{font-family:var(--serif);font-size:3rem;font-weight:400;line-height:1;margin-bottom:.25rem}
+.ready .result-score{color:var(--forest)}
+.gaps .result-score{color:#5a3e00}
+.foundation .result-score{color:var(--red)}
+.result-label{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.5rem}
+.result-desc{font-size:13px;color:var(--ink-soft);line-height:1.6;font-weight:300}
+.breakdown-card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.bk-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:.85rem}
+.bk-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.bk-row:last-child{border-bottom:none;padding-bottom:0}
+.bk-section{font-size:12px;color:var(--ink-soft);flex:1}
+.bk-bar-wrap{width:100px;height:6px;background:var(--rule);border-radius:3px;overflow:hidden;margin:0 .75rem}
+.bk-bar{height:100%;border-radius:3px;transition:width .5s ease}
+.bk-score{font-size:12px;font-weight:600;color:var(--ink);min-width:36px;text-align:right}
+.reco-card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.reco-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:.85rem}
+.reco-pkg{border-radius:8px;padding:1rem;margin-bottom:.75rem;border:1px solid}
+.reco-pkg.p1{background:var(--forest-pale);border-color:var(--forest-pale-2)}
+.reco-pkg.p2{background:#fef9e7;border-color:#e8d5a0}
+.reco-pkg.p3{background:var(--red-light);border-color:#e8c0c0}
+.pkg-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.p1 .pkg-label{color:var(--forest-mid)}.p2 .pkg-label{color:#7a4f0a}.p3 .pkg-label{color:var(--red)}
+.pkg-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.2rem}
+.pkg-price{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--ink);margin-bottom:.3rem}
+.pkg-desc{font-size:12px;color:var(--ink-soft);line-height:1.5}
+.report-box{background:var(--paper-2);border:1px solid var(--rule);border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.report-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:.75rem}
+.report-text{font-family:"Courier New",monospace;font-size:11px;color:var(--ink-soft);line-height:1.7;white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:1rem;margin-bottom:.75rem}
+.copy-btn{font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid var(--rule);background:#fff;color:var(--ink);cursor:pointer;transition:background .15s;font-family:var(--sans)}
+.copy-btn:hover{background:var(--paper)}
+.cta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.cta-primary{font-size:13px;font-weight:600;color:#fff;background:var(--forest);border:none;padding:12px;border-radius:8px;cursor:pointer;text-align:center;text-decoration:none;display:block;transition:background .15s;font-family:var(--sans)}
+.cta-primary:hover{background:var(--forest-2)}
+.cta-secondary{font-size:13px;color:var(--ink);background:none;border:1px solid var(--rule);padding:12px;border-radius:8px;cursor:pointer;text-align:center;transition:background .15s;font-family:var(--sans)}
+.cta-secondary:hover{background:var(--paper-2)}
+.restart-btn{font-size:12px;color:var(--ink-muted);background:none;border:none;cursor:pointer;text-decoration:underline;display:block;text-align:center;margin-top:.5rem;font-family:var(--sans)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem}
+.btn-back{font-size:13px;color:var(--ink-soft);background:none;border:1px solid var(--rule);padding:9px 18px;border-radius:6px;cursor:pointer;transition:background .15s;font-family:var(--sans)}
+.btn-back:hover{background:var(--paper-2)}
+.btn-next{font-size:13px;font-weight:600;color:#fff;background:var(--forest);border:none;padding:9px 22px;border-radius:6px;cursor:pointer;transition:background .15s;font-family:var(--sans)}
+.btn-next:hover{background:var(--forest-2)}
+.btn-next:disabled{opacity:.3;cursor:not-allowed}
+.score-meter{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:.75rem 1rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem}
+.sm-label{font-size:11px;color:var(--ink-muted);font-weight:500}
+.sm-track{flex:1;height:8px;background:var(--rule);border-radius:4px;overflow:hidden}
+.sm-fill{height:100%;border-radius:4px;transition:width .3s ease,background .3s ease}
+.sm-score{font-size:13px;font-weight:600;color:var(--ink);min-width:60px;text-align:right}
+footer{border-top:1px solid var(--rule);padding:1.5rem;text-align:center;background:var(--paper-2)}
+.footer-logo img{height:22px;display:block;margin:0 auto .5rem;opacity:.7;filter:grayscale(1)}
+footer p{font-size:11px;color:var(--ink-muted);line-height:1.7}
+footer a{color:var(--forest-mid);text-decoration:none}
+@media print{nav,.cta-row,.restart-btn,.nav-row,footer{display:none!important}.report-box{display:block!important}body{background:#fff}}
+@media(max-width:500px){.cta-row{grid-template-columns:1fr}.score-btn{padding:5px 2px;font-size:11px}}
+
+.nav-logo-text{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:#fff;text-decoration:none;letter-spacing:.02em}
+.nav-logo-text span{color:var(--forest-light)}
+.footer-logo-text{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--ink-muted);letter-spacing:.02em;margin-bottom:.5rem;display:block}
+.footer-logo-text span{color:var(--forest-mid)}
+</style>
+</head>
+<body>
+
+<nav>
+  <!-- LOGO: replace with <img src="Idela_Logo_4.png" alt="Idela" style="height:28px"> when ready -->
+  <a href="https://www.idelaonline.com" class="nav-logo-text">Idela<span>.</span></a>
+  <a href="https://www.idelaonline.com" class="nav-back">← idelaonline.com</a>
+</nav>
+
+<div class="page">
+
+<div id="intro-screen">
+  <div class="intro-eyebrow">Free diagnostic &middot; Idela</div>
+  <h1 class="intro-title">Cyber Essentials<br>Readiness Diagnostic</h1>
+  <p class="intro-sub">Score your readiness in 5 minutes based on the seven most common CE failure points. Identifies exactly where you stand &mdash; and which Idela package fits your situation.</p>
+  <div class="intro-meta">21 statements &middot; 7 sections &middot; Max score 84 &middot; Takes approximately 5 minutes</div>
+  <button class="btn-next" style="width:100%;padding:12px;font-size:14px" onclick="startTool()">Start diagnostic &rarr;</button>
+</div>
+
+<div id="assessment-screen" style="display:none">
+  <div class="score-meter">
+    <span class="sm-label">Running score</span>
+    <div class="sm-track"><div class="sm-fill" id="sm-fill" style="width:0%;background:var(--forest-light)"></div></div>
+    <span class="sm-score" id="sm-score">0 / 84</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label" id="prog-label">Section 1 of 7</span>
+      <span class="progress-pct" id="prog-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+  <div id="sections-container"></div>
+  <div class="nav-row">
+    <button class="btn-back" id="btn-back" onclick="prevSection()" style="visibility:hidden">&larr; Back</button>
+    <button class="btn-next" id="btn-next" onclick="nextSection()" disabled>Continue &rarr;</button>
+  </div>
+</div>
+
+<div id="result-screen" style="display:none">
+  <div id="result-hero"></div>
+  <div id="breakdown-card"></div>
+  <div id="reco-card"></div>
+  <div class="cta-row">
+    <a href="https://calendly.com/partners-idelaonline/free-ce-readiness-call" target="_blank" class="cta-primary">Book a free readiness call</a>
+    <button class="cta-secondary" onclick="toggleReport()">Copy shareable report</button>
+  </div>
+  <div class="report-box" id="report-box" style="display:none">
+    <div class="report-label">Shareable plain-text report</div>
+    <div class="report-text" id="report-text"></div>
+    <button class="copy-btn" id="copy-btn" onclick="copyReport()">Copy to clipboard</button>
+  </div>
+  <button class="restart-btn" onclick="restart()">Start again</button>
+</div>
+
+</div>
+
+<footer>
+  <div class="footer-logo-text">Idela<span>.</span></div>
+  <p>
+    IASME-approved Certification Body<br>
+    Cyber Essentials &middot; IASME Cyber Assurance &middot; DCC Level 0 &middot; DCC Level 1<br>
+    <a href="mailto:letstalk@idelaonline.com">letstalk@idelaonline.com</a> &middot; <a href="https://www.idelaonline.com">www.idelaonline.com</a><br>
+    167-169 Great Portland Street, Fifth Floor, London W1W 5PF<br><br>
+    This diagnostic is indicative only. Book a free call for a precise assessment.
+  </p>
+</footer>
+
+<script>
+var sections=[
+  {title:"Scope Understanding",max:12,statements:[
+    "We have mapped our complete digital estate including office devices, remote workers, mobile phones, cloud services, and all internet-connected systems",
+    "We understand that BYOD devices, home-working laptops, and cloud infrastructure must be included in scope",
+    "We have documented our scope definition clearly and can explain what is included and why"
+  ]},
+  {title:"MSP & Documentation Readiness",max:12,statements:[
+    "If we use an MSP, we have confirmed they can provide certification-ready documentation — firewall configs, patch management evidence, access control policies",
+    "We understand which controls are our MSP responsibility vs. our organisational responsibility",
+    "We have documented policies and processes for security controls, not just verbal assurances"
+  ]},
+  {title:"Patch Management",max:12,statements:[
+    "We have visibility into patch status across our entire estate — not just relying on automatic updates",
+    "We can demonstrate that critical security patches are applied within 14 days of release",
+    "We have a documented process for managing patch exceptions and tracking compliance"
+  ]},
+  {title:"Multi-Factor Authentication",max:12,statements:[
+    "MFA is enabled for all remote access to our systems and all administrator accounts",
+    "We use app-based or hardware token MFA, not just SMS codes",
+    "Any MFA exceptions are documented with clear business justification"
+  ]},
+  {title:"User Access & Shared Accounts",max:12,statements:[
+    "Every user has their own unique account — we have eliminated all shared logins",
+    "User access rights are appropriate to roles, with admin privileges limited to those who genuinely need them",
+    "We have a process for promptly disabling accounts when people leave and we regularly review access rights"
+  ]},
+  {title:"Firewall & Network Boundaries",max:12,statements:[
+    "Our boundary firewall is configured with deny-by-default rules and we can export or explain our ruleset",
+    "Default credentials have been changed and unnecessary services such as UPnP and remote management are disabled",
+    "Guest WiFi and IoT devices are properly segmented from our business network"
+  ]},
+  {title:"Preparation & Planning",max:12,statements:[
+    "We are starting this process at least 4 to 6 weeks before we need certification",
+    "We have gathered evidence for our controls — screenshots, config exports, policy documents — before submission",
+    "We have conducted an honest gap assessment and addressed weaknesses before formal certification"
+  ]}
+];
+
+var answers={};
+var currentSection=0;
+
+function startTool(){
+  document.getElementById("intro-screen").style.display="none";
+  document.getElementById("assessment-screen").style.display="block";
+  currentSection=0;renderSection();window.scrollTo(0,0);
+}
+
+function renderSection(){
+  var s=sections[currentSection];
+  var pct=Math.round(currentSection/sections.length*100);
+  document.getElementById("prog-label").textContent="Section "+(currentSection+1)+" of "+sections.length;
+  document.getElementById("prog-pct").textContent=pct+"%";
+  document.getElementById("prog-fill").style.width=pct+"%";
+  document.getElementById("btn-back").style.visibility=currentSection===0?"hidden":"visible";
+  document.getElementById("btn-next").disabled=!sectionComplete(currentSection);
+  document.getElementById("btn-next").textContent=currentSection===sections.length-1?"See my results →":"Continue →";
+  var html='<div class="section-card active"><div class="section-hdr"><span class="section-num">'+(currentSection+1)+'</span><span class="section-title">'+s.title+'</span><span class="section-max">Max '+s.max+' pts</span></div><div class="section-body">';
+  s.statements.forEach(function(stmt,i){
+    var cur=getAnswer(currentSection,i);
+    html+='<div class="statement"><div class="stmt-text">'+stmt+'</div><div class="score-btns">';
+    [[4,"Fully true"],[2,"Partly true"],[0,"Not true"]].forEach(function(pair){
+      var v=pair[0],lbl=pair[1];
+      var cls="score-btn"+(cur===v?" sel"+v:"");
+      html+='<button class="'+cls+'" onclick="setAnswer('+currentSection+','+i+','+v+')">'+lbl+'<br><span style="font-size:10px;opacity:.7">'+v+' pts</span></button>';
+    });
+    html+='</div></div>';
+  });
+  html+='</div></div>';
+  document.getElementById("sections-container").innerHTML=html;
+  updateMeter();
+}
+
+function getAnswer(s,i){return answers[s+"-"+i];}
+
+function setAnswer(s,i,v){
+  answers[s+"-"+i]=v;renderSection();
+}
+
+function sectionComplete(s){
+  return sections[s].statements.every(function(_,i){return getAnswer(s,i)!==undefined;});
+}
+
+function totalScore(){
+  var t=0;
+  sections.forEach(function(s,si){s.statements.forEach(function(_,i){var v=getAnswer(si,i);if(v!==undefined)t+=v;});});
+  return t;
+}
+
+function sectionScore(si){
+  var t=0;sections[si].statements.forEach(function(_,i){var v=getAnswer(si,i);if(v!==undefined)t+=v;});return t;
+}
+
+function updateMeter(){
+  var score=totalScore();var pct=Math.round(score/84*100);
+  document.getElementById("sm-fill").style.width=pct+"%";
+  document.getElementById("sm-fill").style.background=score>=68?"var(--forest-light)":score>=40?"#c9a84c":"#c0707a";
+  document.getElementById("sm-score").textContent=score+" / 84";
+}
+
+function nextSection(){
+  if(!sectionComplete(currentSection))return;
+  if(currentSection<sections.length-1){currentSection++;renderSection();window.scrollTo(0,0);}
+  else showResults();
+}
+
+function prevSection(){
+  if(currentSection>0){currentSection--;renderSection();window.scrollTo(0,0);}
+}
+
+function getResult(score){
+  if(score>=68)return{cls:"ready",label:"Certification Ready",eyebrow:"68-84 points",desc:"Your controls are largely implemented and documented. You likely need a quick validation to confirm everything aligns with CE requirements before formal submission.",pkg:1};
+  if(score>=40)return{cls:"gaps",label:"Gaps Identified",eyebrow:"40-67 points",desc:"You have foundational controls in place but clear gaps in implementation or documentation. These gaps will cause problems during formal assessment.",pkg:2};
+  return{cls:"foundation",label:"Foundation Needed",eyebrow:"0-39 points",desc:"You are starting from low maturity. Attempting certification now would likely fail or require extensive rework. You need comprehensive support to build controls properly first.",pkg:3};
+}
+
+var pkgs={
+  1:{cls:"p1",label:"Recommended",name:"Readiness Validation",price:"From £450 +VAT",desc:"Quick validation, minor gap identification, IASME fee included. Micro organisations. Small from £750, medium from £950."},
+  2:{cls:"p2",label:"Recommended",name:"Readiness and Assessment",price:"From £750 +VAT",desc:"Full gap assessment, documentation guidance, evidence preparation, certification. Small from £950, medium from £1,250."},
+  3:{cls:"p3",label:"Recommended",name:"Cyber Assurance Pathway",price:"From £2,500 +VAT",desc:"End-to-end support, policy development, 6-12 week engagement. Micro organisations. Small from £3,500."}
+};
+
+function showResults(){
+  document.getElementById("assessment-screen").style.display="none";
+  document.getElementById("result-screen").style.display="block";
+  window.scrollTo(0,0);
+  var score=totalScore();var r=getResult(score);var pkg=pkgs[r.pkg];
+  document.getElementById("result-hero").innerHTML='<div class="result-hero '+r.cls+'"><div class="result-eyebrow">'+r.eyebrow+'</div><div class="result-score">'+score+'<span style="font-size:1rem;font-weight:400;opacity:.5"> / 84</span></div><div class="result-label">'+r.label+'</div><div class="result-desc">'+r.desc+'</div></div>';
+  var bkRows=sections.map(function(s,i){
+    var sc=sectionScore(i);var pct=Math.round(sc/s.max*100);
+    var col=pct>=75?"var(--forest-light)":pct>=50?"#c9a84c":"#c0707a";
+    return'<div class="bk-row"><span class="bk-section">'+s.title+'</span><div class="bk-bar-wrap"><div class="bk-bar" style="width:'+pct+'%;background:'+col+'"></div></div><span class="bk-score">'+sc+"/"+s.max+"</span></div>";
+  }).join("");
+  document.getElementById("breakdown-card").innerHTML='<div class="breakdown-card"><div class="bk-title">Section breakdown</div>'+bkRows+"</div>";
+  document.getElementById("reco-card").innerHTML='<div class="reco-card"><div class="reco-title">Recommended Idela package</div><div class="reco-pkg '+pkg.cls+'"><div class="pkg-label">'+pkg.label+'</div><div class="pkg-name">'+pkg.name+'</div><div class="pkg-price">'+pkg.price+'</div><div class="pkg-desc">'+pkg.desc+'</div></div><p style="font-size:12px;color:var(--ink-muted);margin-top:.75rem">Pricing confirmed after a free initial call. IASME certification fee included in all packages.</p></div>';
+  window._cer={score:score,r:r,pkg:pkg};
+}
+
+function toggleReport(){
+  var box=document.getElementById("report-box");
+  if(box.style.display==="none"||!box.style.display){buildReport();box.style.display="block";box.scrollIntoView({behavior:"smooth"});}
+  else box.style.display="none";
+}
+
+function buildReport(){
+  var d=window._cer;if(!d)return;
+  var now=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var bkLines=sections.map(function(s,i){return"  "+s.title+": "+sectionScore(i)+"/"+s.max;}).join("\n");
+  document.getElementById("report-text").textContent="IDELA — CYBER ESSENTIALS READINESS DIAGNOSTIC\nDate: "+now+"\n────────────────────────────────────────\n\nRESULT\nScore         : "+d.score+" / 84\nBand          : "+d.r.label+" ("+d.r.eyebrow+")\nAssessment    : "+d.r.desc+"\n\nSECTION BREAKDOWN\n"+bkLines+"\n\nRECOMMENDED PACKAGE\n"+d.pkg.name+"\n"+d.pkg.price+"\n"+d.pkg.desc+"\n\n────────────────────────────────────────\nIssued by Idela Limited\nIASME-approved Certification Body\nCyber Essentials · IASME Cyber Assurance · DCC Level 0 · DCC Level 1\n\nletstalk@idelaonline.com\nwww.idelaonline.com\nBook a call: calendly.com/partners-idelaonline/free-ce-readiness-call\n167-169 Great Portland Street, Fifth Floor, London W1W 5PF\n\nThis diagnostic is indicative only. Idela will confirm scope and pricing before any engagement begins.";
+}
+
+function copyReport(){
+  var text=document.getElementById("report-text").textContent;
+  var btn=document.getElementById("copy-btn");
+  navigator.clipboard.writeText(text).then(function(){btn.textContent="Copied";setTimeout(function(){btn.textContent="Copy to clipboard";},2500);}).catch(function(){var ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);btn.textContent="Copied";setTimeout(function(){btn.textContent="Copy to clipboard";},2500);});
+}
+
+function restart(){
+  answers={};currentSection=0;
+  document.getElementById("result-screen").style.display="none";
+  document.getElementById("report-box").style.display="none";
+  document.getElementById("intro-screen").style.display="block";
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
