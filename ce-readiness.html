@@ -164,7 +164,7 @@ footer a{color:var(--forest-mid);text-decoration:none}
   <div id="breakdown-card"></div>
   <div id="reco-card"></div>
   <div class="cta-row">
-    <a href="https://calendly.com/partners-idelaonline/free-ce-readiness-call" target="_blank" class="cta-primary">Book a free readiness call</a>
+    <a href="https://calendly.com/partners-idelaonline/free-readiness-call" target="_blank" class="cta-primary">Book a free readiness call</a>
     <button class="cta-secondary" onclick="toggleReport()">Copy shareable report</button>
   </div>
   <div class="report-box" id="report-box" style="display:none">
@@ -336,7 +336,7 @@ function buildReport(){
   var d=window._cer;if(!d)return;
   var now=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
   var bkLines=sections.map(function(s,i){return"  "+s.title+": "+sectionScore(i)+"/"+s.max;}).join("\n");
-  document.getElementById("report-text").textContent="IDELA — CYBER ESSENTIALS READINESS DIAGNOSTIC\nDate: "+now+"\n────────────────────────────────────────\n\nRESULT\nScore         : "+d.score+" / 84\nBand          : "+d.r.label+" ("+d.r.eyebrow+")\nAssessment    : "+d.r.desc+"\n\nSECTION BREAKDOWN\n"+bkLines+"\n\nRECOMMENDED PACKAGE\n"+d.pkg.name+"\n"+d.pkg.price+"\n"+d.pkg.desc+"\n\n────────────────────────────────────────\nIssued by Idela Limited\nIASME-approved Certification Body\nCyber Essentials · IASME Cyber Assurance · DCC Level 0 · DCC Level 1\n\nletstalk@idelaonline.com\nwww.idelaonline.com\nBook a call: calendly.com/partners-idelaonline/free-ce-readiness-call\n167-169 Great Portland Street, Fifth Floor, London W1W 5PF\n\nThis diagnostic is indicative only. Idela will confirm scope and pricing before any engagement begins.";
+  document.getElementById("report-text").textContent="IDELA — CYBER ESSENTIALS READINESS DIAGNOSTIC\nDate: "+now+"\n────────────────────────────────────────\n\nRESULT\nScore         : "+d.score+" / 84\nBand          : "+d.r.label+" ("+d.r.eyebrow+")\nAssessment    : "+d.r.desc+"\n\nSECTION BREAKDOWN\n"+bkLines+"\n\nRECOMMENDED PACKAGE\n"+d.pkg.name+"\n"+d.pkg.price+"\n"+d.pkg.desc+"\n\n────────────────────────────────────────\nIssued by Idela Limited\nIASME-approved Certification Body\nCyber Essentials · IASME Cyber Assurance · DCC Level 0 · DCC Level 1\n\nletstalk@idelaonline.com\nwww.idelaonline.com\nBook a call: calendly.com/partners-idelaonline/free-readiness-call\n167-169 Great Portland Street, Fifth Floor, London W1W 5PF\n\nThis diagnostic is indicative only. Idela will confirm scope and pricing before any engagement begins.";
 }
 
 function copyReport(){
