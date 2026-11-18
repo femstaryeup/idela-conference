@@ -652,7 +652,7 @@ const questions = [
   {
     id:'q3', section:'Contract context',
     text:'Has your MOD buyer or prime contractor specifically mentioned DCC, DefStan 05-138, or a Cyber Risk Profile in your contract or pre-qualification documents?',
-    hint:'If yes, you may already have a specific level assigned. If not, your level will be determined during assessment scoping.',
+    hint:'If yes, you may already have a specific level assigned. If not, ask your MOD buyer or prime contractor which Cyber Risk Profile applies.',
     opts:[
       {t:'Yes — they have specified a DCC level (Level 0, 1, 2 or 3)', v:3},
       {t:'Yes — DCC or DefStan was mentioned but no specific level confirmed yet', v:2},
@@ -900,7 +900,7 @@ function getNextSteps(level, readiness, ceStatus) {
   if (readiness.label.includes('preparation') || readiness.label.includes('renewal')) {
     steps.push({ n: String(n++).padStart(2,'0'), title: 'Address the gaps identified in this report', detail: 'Work through the priority gaps before booking formal DCC assessment. Idela offers policy templates, evidence preparation support, and technical configuration guidance.' });
   }
-  steps.push({ n: String(n++).padStart(2,'0'), title: 'Book a free DCC Level ' + level + ' readiness call with Idela', detail: 'Confirm your Cyber Risk Profile, clarify any contract-specific requirements, and get a clear timeline to certification. 15 minutes, no obligation, no sales pressure.' });
+  steps.push({ n: String(n++).padStart(2,'0'), title: 'Book a free DCC Level ' + level + ' readiness call with Idela', detail: 'Work out which level your contract points to, clarify any contract-specific requirements, and get a clear timeline to certification. 15 minutes, no obligation, no sales pressure.' });
   steps.push({ n: String(n++).padStart(2,'0'), title: 'Formal DCC Level ' + level + ' assessment', detail: 'Once ready, Idela will conduct a formal assessment against DefStan 05-138 criteria. Certification is issued when all required controls are genuinely in place.' });
   return steps;
 }
@@ -925,7 +925,7 @@ function showResults() {
     <div class="result-level">DCC Level ${level} recommended</div>
     <div class="result-desc">${level === 0
       ? 'Based on your responses, your organisation likely sits at a Level 0 Cyber Risk Profile — the entry tier for defence supply chain participation. Three controls, six questions, with Cyber Essentials as the required baseline.'
-      : 'Based on your responses, your organisation likely sits at a Level 1 Cyber Risk Profile — the standard requirement for most defence supply chain contracts. 101 controls across governance, technical, personnel, and supply chain domains.'
+      : 'Based on your responses, your organisation likely sits at a Level 1 Cyber Risk Profile — typically for suppliers with greater cyber risk in their contracts. 101 controls across governance, technical, personnel, and supply chain domains.'
     }</div>
     <div class="result-badges">
       <span class="badge ${readiness.cls}">${readiness.label}</span>
@@ -1013,8 +1013,8 @@ Book a call: calendly.com/partners-idelaonline/free-readiness-call
 
 DISCLAIMER: This report is indicative only and based on
 self-reported responses. Your formal Cyber Risk Profile is
-assigned by MOD delivery teams. Idela will confirm your
-required DCC level before any formal assessment begins.`;
+assigned by MOD delivery teams. Idela will help you work out which
+level your contract points to before any formal assessment begins.`;
 }
 
 function copyReport() {
